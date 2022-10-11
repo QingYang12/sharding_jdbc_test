@@ -1,0 +1,32 @@
+//db_test_1库
+CREATE TABLE `order_1` (
+  `orderid` int NOT NULL,
+  `userid` int DEFAULT NULL,
+  `goods` int DEFAULT NULL,
+  `money` double DEFAULT NULL,
+  PRIMARY KEY (`orderid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='分库分表： db_test_1数据库 order_1表';
+
+CREATE TABLE `order_2` (
+  `orderid` int NOT NULL,
+  `userid` int DEFAULT NULL,
+  `goods` int DEFAULT NULL,
+  `money` double DEFAULT NULL,
+  PRIMARY KEY (`orderid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='分库分表： db_test_1数据库 order_2表';
+//db_test_2库
+CREATE TABLE `order_1` (
+  `orderid` int NOT NULL,
+  `userid` int DEFAULT NULL,
+  `goods` int DEFAULT NULL,
+  `money` double DEFAULT NULL,
+  PRIMARY KEY (`orderid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='分库分表： db_test_2数据库 order_1表';
+
+CREATE TABLE `order_2` (
+  `orderid` int NOT NULL,
+  `userid` int DEFAULT NULL,
+  `goods` int DEFAULT NULL,
+  `money` double DEFAULT NULL,
+  PRIMARY KEY (`orderid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='分库分表： db_test_2数据库 order_2表';

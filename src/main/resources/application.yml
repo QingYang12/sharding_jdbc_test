@@ -1,0 +1,42 @@
+spring:
+  shardingsphere:
+    #系统属性，显示正常的SQL语句
+    props:
+      sql:
+        show: true
+    datasource:
+      names: ds1,ds2
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/db_test_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+      ds2:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/db_test_2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+    #指定分库的列和具体的分片算法
+    sharding:
+      default-database-strategy:
+        inline:
+          sharding-column: userid
+          algorithm-expression: ds$->{userid %  2 + 1}
+      #指定分表的列和具体的分表算法
+      tables:
+        #替换分表的数据表名称
+        orders:
+          actual-data-nodes: ds$->{1..2}.order_$->{1..2}
+          table-strategy:
+            inline:
+              sharding-column: orderid
+              algorithm-expression: order_${orderid % 2 + 1}
+mybatis:
+  #标注mybatis配置文件的位置
+  #config-location: classpath:mybatis-config.xml
+  #标注待解析的mapper的xml文件位置
+  mapper-locations: classpath:mapper/*.xml
+  #标注实体类位置
+  type-aliases-package: com.cutty_pet.cutty_pet

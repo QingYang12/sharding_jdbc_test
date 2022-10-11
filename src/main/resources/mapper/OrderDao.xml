@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.order.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="test.order.model.Order">
+    <id column="orderid" jdbcType="INTEGER" property="orderid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="goods" jdbcType="INTEGER" property="goods" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderid, userid, goods, money
+  </sql>
+  <select id="selectall"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from orders
+  </select>
+  <insert id="insert" parameterType="test.order.model.Order" >
+    insert into orders (orderid,userid, goods, money
+      )
+    values (#{orderid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{goods,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}
+      )
+  </insert>
+</mapper>
